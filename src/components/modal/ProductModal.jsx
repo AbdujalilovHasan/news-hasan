@@ -1,18 +1,24 @@
 import React from 'react';
-import './ProductModal.css';
+import { Modal } from 'react-bootstrap';
 
-const Modal = ({ isOpen, onClose, product }) => {
-  if (!isOpen || !product) return null;
+const ProductModal = ({ isOpen, onClose, product }) => {
+    if (!product) return null;
 
-  return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <h2>{product.title}</h2>
-        <p>{product.description}</p>
-        <button onClick={onClose} className="btn btn-secondary">Close</button>
-      </div>
-    </div>
-  );
+    return (
+        <Modal show={isOpen} onHide={onClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>{product.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <img src={product.image} alt={product.title} style={{ width: '100%', height: 'auto' }} />
+                <p>Price: ${product.price}</p>
+                <p>{product.description}</p>
+            </Modal.Body>
+            <Modal.Footer>
+                <button className="btn btn-secondary" onClick={onClose}>Close</button>
+            </Modal.Footer>
+        </Modal>
+    );
 };
 
-export default Modal;
+export default ProductModal;

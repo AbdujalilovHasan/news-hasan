@@ -16,7 +16,6 @@ class App extends Component {
       searchQuery: '',
       isModalOpen: false,
       modalProduct: null,
-      loading: false,
     };
   }
 
