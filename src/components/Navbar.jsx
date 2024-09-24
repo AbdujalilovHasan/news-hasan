@@ -1,92 +1,56 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 export class Navbar extends Component {
   state = {
-    activeKey: 'home' 
+    activeKey: 'home',
+    search: '',
   };
 
   handleSelect = (selectedKey) => {
     this.setState({ activeKey: selectedKey });
   };
 
+  handleSearchChange = (e) => {
+    this.setState({ search: e.target.value });
+    this.props.onSearch(e.target.value);
+  };
+
   render() {
-    const { activeKey } = this.state;
+    const { activeKey, search } = this.state;
 
     return (
       <nav className="bg-primary p-3 fs-5">
-        <div className="w-75 mx-auto">
-          <Nav
-            className="nav-underline gap-4"
-            activeKey={activeKey}
-            onSelect={this.handleSelect} 
-          >
+        <div className="w-75 mx-auto d-flex justify-content-between align-items-center">
+          <Nav className="nav-underline gap-4" activeKey={activeKey} onSelect={this.handleSelect}>
             <Nav.Item>
-              <Nav.Link
-                eventKey="home" 
-                style={{ color: '#fff' }}
-              >
-                Home
-              </Nav.Link>
+              <NavLink to="/" className="nav-link" style={{ color: '#fff' }}>Home</NavLink>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link
-                eventKey="link1"
-                style={{ color: '#fff' }}
-              >
-                Business
-              </Nav.Link>
+              <NavLink to="/category/men's clothing" className="nav-link" style={{ color: '#fff' }}>Men's Clothing</NavLink>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link
-                eventKey="link2"
-                style={{ color: '#fff' }}
-              >
-                Entertainment
-              </Nav.Link>
+              <NavLink to="/category/jewelery" className="nav-link" style={{ color: '#fff' }}>Jewelry</NavLink>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link
-                eventKey="link3"
-                style={{ color: '#fff' }}
-              >
-                General
-              </Nav.Link>
+              <NavLink to="/category/electronics" className="nav-link" style={{ color: '#fff' }}>Electronics</NavLink>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link
-                eventKey="link3"
-                style={{ color: '#fff' }}
-              >
-                Health
-              </Nav.Link>
+              <NavLink to="/category/women's clothing" className="nav-link" style={{ color: '#fff' }}>Women's Clothing</NavLink>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link
-                eventKey="link3"
-                style={{ color: '#fff' }}
-              >
-                Science
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                eventKey="link3"
-                style={{ color: '#fff' }}
-              >
-                Sports
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                eventKey="link3"
-                style={{ color: '#fff' }}
-              >
-                Technology
-              </Nav.Link>
+              <NavLink to="/cart" className="nav-link" style={{ color: '#fff' }}>Cart</NavLink>
             </Nav.Item>
           </Nav>
+          <input
+            type="text"
+            value={search}
+            onChange={this.handleSearchChange}
+            placeholder="Search..."
+            className="form-control w-25"
+          />
         </div>
       </nav>
     );
